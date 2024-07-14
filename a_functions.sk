@@ -1,0 +1,44 @@
+function wrapText(text: text) :: text:
+    set {_desiredLength} to 40
+    set {_textLength} to length of {_text}
+    set {_remainingLength} to {_desiredLength} - {_textLength}
+    set {_sideLength} to {_remainingLength} / 2
+
+    set {_leftPadding} to ""
+    set {_rightPadding} to ""
+
+    
+
+    loop {_sideLength} times:
+        set {_leftPadding} to "%{_leftPadding}%="
+
+    if mod({_remainingLength}, 2) is not 0:
+        set {_leftPadding} to "%{_leftPadding}%="
+        set {_sideLength} to {_sideLength} - 1
+
+    loop {_sideLength} times:    
+        set {_rightPadding} to "%{_rightPadding}%="
+
+    return "%{_leftPadding}%%{_text}%%{_rightPadding}%"
+
+function findSimilar(input: text, choices: texts) :: text:
+    set {_input} to {_input} in lowercase
+    set {_bestMatch} to ""
+    set {_bestMatchLength} to 0
+
+    loop {_choices::*}:
+        set {_choice} to loop-value
+        set {_choiceLower} to loop-value in lowercase
+        set {_matchLength} to 0
+        
+        loop (length of {_input}) times:
+            set {_inputChar} to character at loop-value-2 in {_input}
+            set {_choiceChar} to character at loop-value-2 in {_choiceLower}
+            if {_inputChar} is {_choiceChar}:
+                add 1 to {_matchLength}
+            
+        if {_matchLength} > {_bestMatchLength}:
+            set {_bestMatch} to {_choice}
+            set {_bestMatchLength} to {_matchLength}
+            
+    return {_bestMatch}

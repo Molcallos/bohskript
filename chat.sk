@@ -1,0 +1,118 @@
+on chat:
+	cancel event
+	set {_name} to readYml("%player's name%.Bilgi.İsim")
+	set {_race} to readYml("%player's name%.Bilgi.Millet")
+	loop players in radius 20 of player:
+		if player is target of loop-player:
+			send "&8[&3%{_race}%&8] &6%{_name}% &f""%message%""" to loop-player
+		else if loop-player is player:
+			send "&8[&3%{_race}%&8] &c%{_name}% &f""%message%""" to loop-player
+		else:
+			send "&8[&3%{_race}%&8] &e%{_name}% &f""%message%""" to loop-player
+
+command /b [<text>]:
+	aliases: ooc
+	trigger:
+		if arg-1 is set:
+			loop players in radius 20 of player:
+				if player is target of loop-player:
+					send "&7[&8OOC&7] &6%player's name% &f""%arg-1%""" to loop-player
+				else if loop-player is player:
+					send "&7[&8OOC&7] &c%player's name% &f""%arg-1%""" to loop-player
+				else:
+					send "&7[&8OOC&7] &e%player's name% &f""%arg-1%""" to loop-player
+
+command /me [<text>]:
+	trigger:
+		if arg-1 is set:
+			set {_name} to readYml("%player's name%.Bilgi.İsim")
+			loop players in radius 20 of player:
+				if player is target of loop-player:
+					send "&8[&9Hareket&8] &6%{_name}% &c%arg-1%" to loop-player
+				else if loop-player is player:
+					send "&8[&9Hareket&8] &c%{_name}% &c%arg-1%" to loop-player
+				else:
+					send "&8[&9Hareket&8] &e%{_name}% &c%arg-1%" to loop-player
+
+command /do [<text>]:
+	trigger:
+		if arg-1 is set:
+			set {_name} to readYml("%player's name%.Bilgi.İsim")
+			loop players in radius 20 of player:
+				if player is target of loop-player:
+					send "&8[&9Durum&8] &a%arg-1% &7((&6%{_name}%&7))" to loop-player
+				else if loop-player is player:
+					send "&8[&9Durum&8] &a%arg-1% &7((&c%{_name}%&7))" to loop-player
+				else:
+					send "&8[&9Durum&8] &a%arg-1% &7((&e%{_name}%&7))" to loop-player
+
+command /ba [<text>]:
+	trigger:
+		set {_name} to readYml("%player's name%.Bilgi.İsim")
+		set {_race} to readYml("%player's name%.Bilgi.Millet")
+		if arg-1 is set:
+			loop players in radius 40 of player:
+				if player is target of loop-player:
+					send "&8[&3%{_race}%&8] &6%{_name}% &f""%arg-1%"" &7((<i>Bağırtı&r&7))" to loop-player
+				else if loop-player is player:
+					send "&8[&3%{_race}%&8] &c%{_name}% &f""%arg-1%"" &7((<i>Bağırtı&r&7))" to loop-player
+				else:
+					send "&8[&3%{_race}%&8] &e%{_name}% &f""%arg-1%"" &7((<i>Bağırtı&r&7))" to loop-player
+
+command /f [<text>]:
+	trigger:
+		set {_name} to readYml("%player's name%.Bilgi.İsim")
+		set {_race} to readYml("%player's name%.Bilgi.Millet")
+		if arg-1 is set:
+			loop players in radius 5 of player:
+				if player is target of loop-player:
+					send "&8[&3%{_race}%&8] &6%{_name}% &f""%arg-1%"" &7((<i>Fısıltı&r&7))" to loop-player
+				else if loop-player is player:
+					send "&8[&3%{_race}%&8] &c%{_name}% &f""%arg-1%"" &7((<i>Fısıltı&r&7))" to loop-player
+				else:
+					send "&8[&3%{_race}%&8] &e%{_name}% &f""%arg-1%"" &7((<i>Fısıltı&r&7))" to loop-player
+
+command /kf [<player>] [<text>]:
+	trigger:
+		set {_name} to readYml("%player's name%.Bilgi.İsim")
+		set {_race} to readYml("%player's name%.Bilgi.Millet")
+		set {_tName} to readYml("%arg-1%.Bilgi.İsim")
+		set {_tPlayer} to arg-1
+		if arg-1 is set:
+			if arg-2 is set:
+				if distance between player and arg-1 is less than 2:
+					loop players in radius 20 of player:
+						if player is target of loop-player:
+							send "&8[&9Hareket&8] &6%{_name}% &c%{_tname}% adlı kişinin kulağına fısıldar." to loop-player
+						else if loop-player is player:
+							send "&8[&9Hareket&8] &c%{_name}% &c%{_tname}% adlı kişinin kulağına fısıldar." to loop-player
+						else:
+							send "&8[&9Hareket&8] &e%{_name}% &c%{_tname}% adlı kişinin kulağına fısıldar." to loop-player
+
+					send "&8[&3%{_race}%&8] &6%{_name}% &f""%arg-2%"" &7((<i>Fısıltı&r&7))" to arg-1
+
+command /duyuru [<text>]:
+	trigger:
+		if player is op:
+			send "&8[&6Duyuru&8] &2%arg-1%" to all players
+
+command /olay [<text>]:
+	trigger:
+		if player is op:
+			send "&8[&6Olay&8] &2%arg-1%" to all players
+
+command /dm [<player>] [<text>]:
+	aliases: pm
+	trigger:
+		if arg-1 is online:
+			if arg-2 is set:
+				send "&8[&6DM&8] ((&c%player's name%&8>>>&6%arg-1%&8)) &f%arg-2%" to player
+				send "&8[&6DM&8] ((&6%player's name%&8>>>&c%arg-1%&8)) &f%arg-2%" to arg-1
+				set {-%player's name%.r} to arg-1
+
+command /r [<text>]:
+	trigger:
+		if {-%player's name%.r} is not none:
+			if arg-1 is set:
+				set {_tPlayer} to {-%player's name%.r}
+				execute player command "/dm %{_tPlayer}% %arg-1%"

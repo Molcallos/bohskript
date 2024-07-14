@@ -1,0 +1,13 @@
+function readYml(fullPath: text) :: text:
+    set {_parts::*} to {_fullPath} split at "."
+    set {_file} to first element of {_parts::*}
+    delete {_parts::1}
+    set {_path} to join {_parts::*} with "."
+
+    load yaml "plugins/Skript/scripts/characters/%{_file}%.yml" as "yamlfile"
+
+    set {_value} to yaml value "%{_path}%" from "yamlfile"
+
+    unload yaml "yamlfile"
+
+    return {_value}

@@ -1,0 +1,43 @@
+command /zar [<number>] [<text>] [<number>]:
+	trigger:
+		set {_name} to readYml("%player's name%.Bilgi.İsim")
+		if arg-1 is set:
+			set {_max} to arg-1
+			if arg-2 is set:
+				if player is op:
+					set {_x} to arg-2
+				else:
+					set {_x} to ""
+			else:
+				set {_x} to random integer between 1 and {_max}
+
+			if {_x} is not "":
+				loop players in radius 20 of player:
+					send "&8[&4!&8] &c%{_name}% &a%{_max}% &7üzerinden bir zar attı ve attığı zar &a%{_x}% &7geldi." to loop-player
+
+		else if arg-2 is set:
+			set {_stats::*} to "Güç", "Çeviklik", "Dayanıklılık", "Zeka", "Karizma", "Bilgelik", "Büyü"
+			set {_stat} to findSimilar(arg-2, {_stats::*})
+			set {_statValue} to readYml("%player's name%.Kabiliyet.%{_stat}%") parsed as integer
+			set {_statMax} to {_statValue} * 10
+			if arg-3 is set:
+				if player is op:
+					set {_x} to arg-3 + {_statValue}
+				else:
+					set {_x} to ""
+			else:
+				set {_x} to (random integer between 1 and {_statMax}) + {_statValue}
+
+			if ({_x} - {_statValue} == 1) or ({_x} - {_statValue} == {_statMax}):
+				set {_x} to "&a%{_x}%&8[&4<b>KRİTİK&r&8]"
+			else:
+				set {_x} to "&a%{_x}%"
+
+			if {_stat} is "":
+				set {_x} to ""
+
+			if {_x} is not "":
+				if {_x} is not bigger than {_statMax} + {_statValue}:		
+					loop players in radius 20 of player:
+						send "&8[&4!&8] &c%{_name}% &7bir &a%{_stat}% &7zarı attı ve attığı zar %{_x}% &7geldi." to loop-player
+				

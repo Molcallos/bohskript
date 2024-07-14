@@ -1,0 +1,48 @@
+command /göster:
+	trigger:
+		set {_name} to readYml("%player's name%.Bilgi.İsim")
+		set {_race} to readYml("%player's name%.Bilgi.Millet")
+		set {_sex} to readYml("%player's name%.Bilgi.Cinsiyet")
+		set {_height} to readYml("%player's name%.Bilgi.Boy")
+		set {_weight} to readYml("%player's name%.Bilgi.Kilo")
+		set {_age} to readYml("%player's name%.Bilgi.Yaş")
+		set {_look} to readYml("%player's name%.Bilgi.Görünüş")
+
+		set {_str} to readYml("%player's name%.Kabiliyet.Güç")
+		set {_end} to readYml("%player's name%.Kabiliyet.Dayanıklılık")
+		set {_dex} to readYml("%player's name%.Kabiliyet.Çeviklik")
+		set {_wis} to readYml("%player's name%.Kabiliyet.Bilgelik")
+		set {_int} to readYml("%player's name%.Kabiliyet.Zeka")
+		set {_char} to readYml("%player's name%.Kabiliyet.Karizma")
+		set {_mgc} to readYml("%player's name%.Kabiliyet.Büyü")
+
+		set {_header} to wrapText(player's name)
+		set {_kheader} to wrapText("Kabiliyetler")
+
+		send formatted "&6%{_header}%", "&6İsim: &f%{_name}%", "&6Milliyet: &f%{_race}%", "&6Cinsiyet: &f%{_sex}%", "&6Yaş: &f%{_age}%" , "&6Boy: &f%{_height}%" , "&6Kilo: &f%{_weight}%", "&6Görünüş: &f%{_look}%", "&6%{_kheader}%", "&6Güç: &f%{_str}%", "&6Dayanıklılık: &f%{_end}%", "&6Çeviklik: &f%{_dex}%", "&6Bilgelik: &f%{_wis}%", "&6Zeka: &f%{_int}%", "&6Karizma: &f%{_char}%", "&6Büyü: &f%{_mgc}%" to player
+
+on right click on player:
+	if player is sneaking:
+		set {_name} to readYml("%clicked player's name%.Bilgi.İsim")
+		set {_race} to readYml("%clicked player's name%.Bilgi.Millet")
+		set {_sex} to readYml("%clicked player's name%.Bilgi.Cinsiyet")
+		set {_height} to readYml("%clicked player's name%.Bilgi.Boy")
+		set {_weight} to readYml("%clicked player's name%.Bilgi.Kilo")
+		set {_age} to readYml("%clicked player's name%.Bilgi.Yaş")
+		set {_look} to readYml("%clicked player's name%.Bilgi.Görünüş")
+
+		set {_header} to wrapText(clicked player's name)
+		send formatted "&6%{_header}%", "&6İsim: &f%{_name}%", "&6Milliyet: &f%{_race}%", "&6Cinsiyet: &f%{_sex}%", "&6Yaş: &f%{_age}%" , "&6Boy: &f%{_height}%" , "&6Kilo: &f%{_weight}%", "&6Görünüş: &f%{_look}%", "&6%{_kheader}%", "&6Güç: &f%{_str}%", "&6Dayanıklılık: &f%{_end}%", "&6Çeviklik: &f%{_dex}%", "&6Bilgelik: &f%{_wis}%", "&6Zeka: &f%{_int}%", "&6Karizma: &f%{_char}%", "&6Büyü: &f%{_mgc}%" to player
+
+		if player is op:
+			set {_kheader} to wrapText("Kabiliyetler")
+
+			set {_str} to readYml("%clicked player's name%.Kabiliyet.Güç")
+			set {_end} to readYml("%clicked player's name%.Kabiliyet.Dayanıklılık")
+			set {_dex} to readYml("%clicked player's name%.Kabiliyet.Çeviklik")
+			set {_wis} to readYml("%clicked player's name%.Kabiliyet.Bilgelik")
+			set {_int} to readYml("%clicked player's name%.Kabiliyet.Zeka")
+			set {_char} to readYml("%clicked player's name%.Kabiliyet.Karizma")
+			set {_mgc} to readYml("%clicked player's name%.Kabiliyet.Büyü")
+
+			send formatted "&6%{_kheader}%", "&6Güç: &f%{_str}%", "&6Dayanıklılık: &f%{_end}%", "&6Çeviklik: &f%{_dex}%", "&6Bilgelik: &f%{_wis}%", "&6Zeka: &f%{_int}%", "&6Karizma: &f%{_char}%", "&6Büyü: &f%{_mgc}%" to player
